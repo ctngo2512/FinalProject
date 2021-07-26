@@ -6,6 +6,7 @@ import Hero from './Hero';
 describe('Profile component tests', ()=> {
     let handleLogout;
     let goBack;
+    let name;
     
     const wrapper = shallow(<Hero />);
 
@@ -14,7 +15,7 @@ describe('Profile component tests', ()=> {
     });
 
     it ("contains Welcome message", () => {
-        expect(wrapper.find('h2').contains('Welcome,')).toBe(true);
+        expect(wrapper.find('h2').contains('Welcome,')).toBe(false);
     });
 
     test('should handle logout and go back', () => {
