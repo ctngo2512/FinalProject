@@ -165,16 +165,11 @@ const FuelForm = (props) => {
        return (formIsValid);
     }
 
-    
-    const handleFormSubmit = e => {
-       
+    const checkForm = e => {
         e.preventDefault();
-
-        setToggleQuote(false);
-        setValues(initialFieldValues);
-
         if(handleValidation(values)){
-         props.gasFormEdit(values);
+            props.gasFormEdit(values);
+            setToggleQuote(true);
         }
         try {
             expect(() =>{ handleValidation(fakeUser); }).toThrow(Error);
@@ -184,8 +179,10 @@ const FuelForm = (props) => {
         }catch{}
     }
 
-    function setTo(varia, str){
-        varia = str;
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        setToggleQuote(false);
+        setValues(initialFieldValues);
     }
 
     return (
@@ -229,11 +226,7 @@ const FuelForm = (props) => {
                     <h5 style={{fontWeight: "bold"}} total>{(toggleQuote) ? "Total amount: $"+ (marginPrice*values.gallon_requested).toFixed(2) : ''}</h5>
                     </div>
                     <div className="quotebtn">
-                    <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Get Quote" className="btn btn-primary btn-block" 
-                        onClick={function(e){
-                            e.preventDefault();
-                            setToggleQuote(true);
-                    }}/>
+                    <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Get Quote" className="btn btn-primary btn-block" onClick={checkForm}/>         
                 </div>
                 <div className="savebtn">
                 <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Submit" className="btn btn-primary btn-block"  onClick={handleFormSubmit}/>
