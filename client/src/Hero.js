@@ -61,7 +61,7 @@ const Hero = (props) => {
         if(isClient){
             nameRef.on('value', function(snapshot){
                 userAddress = (Object.values(snapshot.child('Info').val())[0]);
-                setWelcome(Object.values(snapshot.child('Info').val())[3]);
+                setWelcome((Object.values(snapshot.child('Info').val())[3]).split(' ')[0]);
             })
         }
     })

@@ -89,11 +89,20 @@ const ContactForm = (props) => {
              errors["name"] = "Only letters";
              setNameError("Name can only contain letters.");
         }
+        if(!values.name.match(/^([a-z]+[,.]?[ ]?|[a-z]+['-]?)+$/)){
+            formIsValid = false;
+            errors['name'] = 'Not full name';
+            setNameError("Please enter your first and last names");
+        }
+
         if (values.name.length > 50) {
+            formIsValid = false;
             errors['name'] = 'Is too long';
             setNameError("Name has to be shorter than 50 characters.");
             }        
-        }  
+        }
+        
+        
 
          //---Address 1---
          if(values.address =='' || values.address==null){
