@@ -89,7 +89,7 @@ const ContactForm = (props) => {
              errors["name"] = "Only letters";
              setNameError("Name can only contain letters.");
         }
-        if(!values.name.match(/^([a-z]+[,.]?[ ]?|[a-z]+['-]?)+$/)){
+        if(!values.name.match(/^[a-zA-Z '.-]*$/)){
             formIsValid = false;
             errors['name'] = 'Not full name';
             setNameError("Please enter your first and last names");
