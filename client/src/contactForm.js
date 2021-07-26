@@ -372,7 +372,7 @@ const ContactForm = (props) => {
             <div className="form-group">
                 <div className="savebtn">
                 <input //save button
-                type="submit" value={props.currentId == "" ? "Save" : "Update"} className="btn btn-primary btn-block" />
+                type="submit" disabled={!values.address} value={props.currentId == "" ? "Save" : "Update"} className="btn btn-primary btn-block" />
                 </div>
                 </div>
             </section>
