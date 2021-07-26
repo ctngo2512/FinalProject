@@ -174,6 +174,9 @@ const FuelForm = (props) => {
        
         e.preventDefault();
 
+        setToggleQuote(false);
+        setValues(initialFieldValues);
+        
         if(handleValidation(values)){
          props.gasFormEdit(values);
         }
