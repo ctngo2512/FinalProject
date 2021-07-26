@@ -92,6 +92,8 @@ button {
   padding: 24px 0;
 }
 
+
+
 .login .loginContainer .btnContainer p {
   margin: 14px 0 0 0;
   text-align: right;
@@ -156,6 +158,19 @@ button {
   margin-left: 57%;
 }
 
+.hero button:focus{
+  outline: none !important;
+  border: none !important;
+  box-shadow: none;
+}
+
+.hero .btn-primary:focus{
+  outline: none !important;
+  border: none !important;
+  box-shadow: none;
+}
+
+
 
 @keyframes glowing {
   from {
@@ -182,7 +197,7 @@ button {
   width: 300px;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+.btn-primary, .btn-primary:hover, .btn-primary:active {
   background-color: #072361 !important;
 }
 
