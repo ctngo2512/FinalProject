@@ -97,7 +97,7 @@ const Hero = (props) => {
         <div className="hero">
             {count ? (
                 //runs fuel page
-            <div className="container"> 
+            <section className="hero"> 
                 <nav>
                     <h2>Welcome, {welcome}</h2>
                     <Button className="midButton" onClick = {goBack}>Back</Button>
@@ -140,7 +140,7 @@ const Hero = (props) => {
                         </table>
                     </div>
                     </div>
-                </div>
+                </section>
                 ) : (
                     //runs profile page
             <section className="hero">

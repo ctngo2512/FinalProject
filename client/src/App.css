@@ -124,6 +124,7 @@ button {
 
 .hero nav {
   background: rgba(175, 214, 226, 0.228) 25%;
+  background: linear-gradient(180deg, rgba(6, 43, 54, 0.228) 25%, rgba(168, 173, 247, 0) 200%);
   width: 100%;
   padding: 20px 40px;
   display: flex;
@@ -144,12 +145,12 @@ button {
 
 .hero div.jumbotron-fluid{
   height: 2px;
-  padding-top: 0%;
+  padding-top: 2%;
   padding-bottom: 10%;
-  background: rgb(4,86,111);
-  background: linear-gradient(180deg, rgba(175, 214, 226, 0.228) 25%, rgba(255, 255, 255, 0) 90%);
+  background: rgb(51, 71, 114);
   color: white;
 }
+
 
 .hero button.midButton{
   margin-left: 63%;
