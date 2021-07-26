@@ -30,6 +30,10 @@ const FuelForm = (props) => {
     const [gallonError, setGallonError] = useState('');
     const [dateError, setDateError] = useState('');
 
+    //for pricing module
+    var stateFee, gallonFee, historyFee, marginPrice;
+    var profitFee = 0.1;
+
     const clearErrors = () => {
         setGallonError('');
         setDateError('');
@@ -56,10 +60,29 @@ const FuelForm = (props) => {
     }, [props.currentId, props.fuelObjects, props.initialFieldValues])
     
     const addyRef = fire.database().ref('Users/'+userID);
+    var userState;
+
     try {
         addyRef.on('value', function(snapshot){
             if(snapshot.hasChild('Info')){
                 userAddy = (Object.values(snapshot.child('Info').val())[0]);
+                userState = (Object.values(snapshot.child('Info').val())[4]);
+
+            //---EXTRA PRICING MODULE CALCULATIONS---
+
+                //out of state charges
+                if(userState !='TX'){
+                    stateFee = 0.04;
+                }else{
+                    stateFee = 0.02;
+                }
+            }
+
+            //history discount/fee
+            if(snapshot.hasChild('Transactions')){
+                historyFee = 0.01;
+            }else{
+                historyFee = 0.0;
             }
         })
     } catch {}
@@ -67,13 +90,23 @@ const FuelForm = (props) => {
     const handleInputChange = e => {
         var { name, value} = e.target;
         
+        if(values.gallon_requested.match(/^[1-9][0-9]*/)){
+            if(parseInt(values.gallon_requested)>1000){
+                gallonFee = 0.02;
+            }else{
+                gallonFee = 0.01;
+            }
+        }
+
+        marginPrice = ((stateFee-historyFee+gallonFee+profitFee)*1.50)+1.50;
+
         setValues({
             ...values,
             [name]: value,
             //pseudo suggested price calculator
-            suggested_price: (parseInt(values.gallon_requested))*1.50,
-            total_due: (((parseInt(values.gallon_requested))*1.50)*1.10).toFixed(2),
-            delivery_address:  userAddy
+            suggested_price: marginPrice,
+            total_due: ((parseInt(values.gallon_requested))*marginPrice).toFixed(2),
+            delivery_address: userAddy
         })
 
     }
