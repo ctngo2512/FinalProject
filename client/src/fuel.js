@@ -30,24 +30,26 @@ const FuelForm = (props) => {
     const [gallonError, setGallonError] = useState('');
     const [dateError, setDateError] = useState('');
     const [toggleQuote, setToggleQuote] = useState(false);
-
+    var [values, setValues] = useState(initialFieldValues)
+    const [errorMessage, setErrorMessage] = useState('')
+    const [showQuote, setShowQuote] = useState(false);
     //for pricing module
     var stateFee, gallonFee, historyFee, marginPrice;
     var profitFee = 0.1;
+    var suggestedPop, totalPop;
+
 
     const clearErrors = () => {
         setGallonError('');
         setDateError('');
     }
 
+
     var userAddy;
     const {
         userID
     } = props;
 
-    var [values, setValues] = useState(initialFieldValues)
-    const [errorMessage, setErrorMessage] = useState('')
-    const [showQuote, setShowQuote] = useState(false);
 
     useEffect(() => {
         try {
@@ -61,6 +63,7 @@ const FuelForm = (props) => {
         } catch(error) {}
     }, [props.currentId, props.fuelObjects, props.initialFieldValues])
     
+
     const addyRef = fire.database().ref('Users/'+userID);
     var userState;
 
@@ -98,6 +101,7 @@ const FuelForm = (props) => {
         }
     }
 
+
     marginPrice = ((stateFee-historyFee+gallonFee+profitFee)*1.50)+1.50;
     //alert(gallonFee);
     const handleInputChange = e => {
@@ -114,10 +118,6 @@ const FuelForm = (props) => {
         })
 
     }
-
-   
-   
-    //alert(marginPrice);
    
     
     //validation for fuel form 
@@ -165,7 +165,6 @@ const FuelForm = (props) => {
        return (formIsValid);
     }
 
-    var suggestedPop, totalPop;
     
     const handleFormSubmit = e => {
        
@@ -225,11 +224,11 @@ const FuelForm = (props) => {
                     <p className="errorMsg">{dateError}</p>
                     </div>
             <div className="form-group">
-                <div className="quotebtn">
-                    
+                    <div className="pricepops">
                     <h5 suggestedPrice>{(toggleQuote) ? "Suggested price: "+marginPrice +" per gallon": ''}</h5>
                     <h5>{(toggleQuote) ? "Total amount: $"+ (marginPrice*values.gallon_requested).toFixed(2) : ''}</h5>
-
+                    </div>
+                    <div className="quotebtn">
                     <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Get Quote" className="btn btn-primary btn-block" 
                         onClick={function(e){
                             e.preventDefault();

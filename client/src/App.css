@@ -24,10 +24,6 @@ button {
   cursor: pointer;
 }
 
-button.quoteButton{
-  width: 100%;
-  padding: 8px 0;
-}
 
 .login {
   width: 100%;
@@ -224,4 +220,12 @@ button.quoteButton{
   margin-left: 60px;
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+.quotebtn {
+  margin-bottom: 10px;
+}
+
+.pricepops {
+  margin-bottom: 25px;
 }
