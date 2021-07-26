@@ -125,9 +125,6 @@ const FuelForm = (props) => {
                 formIsValid = false;
                 errors["delivery_date"] = "can't be in the past";
                 setDateError("Date cannot be in the past.");
-                try{
-                    throw new Error("Past");
-                }catch{}
             }
         } 
         else {
@@ -169,7 +166,7 @@ const FuelForm = (props) => {
             expect(() =>{ handleValidation(fakeUser); }).toThrow(Error);
         }catch{}
         try {
-            expect(() =>{ handleValidation(fakeUser2); }).toThrowError("Past");
+            expect(() =>{ handleValidation(fakeUser2); }).toThrow(Error);
         }catch{}
     }
 

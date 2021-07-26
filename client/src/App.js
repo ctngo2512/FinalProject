@@ -46,7 +46,6 @@ const App = () => {
             break;
         }
       });
-      //expect(() =>{ clearInputs(); }).toBeCalled();
   };
 
   //sign up using firebase authentication
@@ -81,7 +80,6 @@ const App = () => {
       if (user){
         clearInputs();
         setUser(user);
-        //alert(user.uid);
         setUserID(user.uid);
       }
       else {
