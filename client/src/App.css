@@ -120,6 +120,9 @@ button {
     rgba(88, 190, 245, 0.324) 50%,
     rgba(78, 92, 170, 0.9) 100%
   );
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  outline-offset: -1px;
 }
 
 .hero nav {
@@ -130,17 +133,20 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+    
 }
 
 .hero nav h2 {
   color: #fff;
   font-size: 30px;
+  
 }
 
 .hero nav button {
   width: 86px;
   padding: 8px 0;
   background: #072361;
+  
 }
 
 .hero div.jumbotron-fluid{
@@ -149,11 +155,16 @@ button {
   padding-bottom: 10%;
   background: rgb(51, 71, 114);
   color: white;
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  outline-offset: -1px;
 }
 
 
 .hero button.midButton{
   margin-left: 57%;
+  margin-left: 63%;
+  
 }
 
 
