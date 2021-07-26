@@ -193,6 +193,5 @@ const Hero = (props) => {
                     </div>
                 </div>
             </section>)}
-                )
             </div>) }
 export default Hero;

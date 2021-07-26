@@ -236,7 +236,7 @@ const FuelForm = (props) => {
                     }}/>
                 </div>
                 <div className="savebtn">
-                <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Save" className="btn btn-primary btn-block"  onClick={handleFormSubmit}/>
+                <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Submit" className="btn btn-primary btn-block"  onClick={handleFormSubmit}/>
                 </div>
                 </div>
                 </div>
