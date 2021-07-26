@@ -16,11 +16,13 @@ const Hero = (props) => {
     var [contactObjects, setContactObjects] = useState({});
     var [fuelObjects, setFuelObjects] = useState({});
     var userAddress = '';
+    const [welcome, setWelcome] = useState('')
     const [isClient, setIsClient] = useState('');
 
     //variables to switch between profile page and fuel page
     const [count, setCount] = useState(false);
     const goBack = () => setCount(value => !value);
+
     //Once components load complete
     useEffect(() => {
         fire.database().ref('Users/'+userID).on('value', snapshot => {
@@ -59,8 +61,8 @@ const Hero = (props) => {
         if(isClient){
             nameRef.on('value', function(snapshot){
                 userAddress = (Object.values(snapshot.child('Info').val())[0]);
+                setWelcome(Object.values(snapshot.child('Info').val())[3]);
             })
-       
         }
     })
 
@@ -97,7 +99,7 @@ const Hero = (props) => {
                 //runs fuel page
             <div className="container"> 
                 <nav>
-                    <h2>Welcome, </h2>
+                    <h2>Welcome, {welcome}</h2>
                     <Button className="midButton" onClick = {goBack}>Back</Button>
                     <Button className="logoutButt" //logout button
                     onClick={handleLogout}>Log Out</Button>
@@ -143,7 +145,7 @@ const Hero = (props) => {
                     //runs profile page
             <section className="hero">
                 <nav>
-                    <h2>Welcome, </h2>
+                    <h2>Welcome, {welcome}</h2>
                     <Button className="midButton" onClick={() => setCount(!count)}>
                         Fuel Form
                     </Button>
