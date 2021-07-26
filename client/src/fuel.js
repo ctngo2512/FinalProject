@@ -148,7 +148,7 @@ const FuelForm = (props) => {
                 setDateError("Delivery date has to be in the form of 00/00/0000.");
             }
         }
-
+        //need to fix
         //gallons requested
         if(values.gallon_requested=='' || values.gallon_requested==null){
            formIsValid = false;
