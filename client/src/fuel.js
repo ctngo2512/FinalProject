@@ -176,7 +176,7 @@ const FuelForm = (props) => {
 
         setToggleQuote(false);
         setValues(initialFieldValues);
-        
+
         if(handleValidation(values)){
          props.gasFormEdit(values);
         }
@@ -231,7 +231,7 @@ const FuelForm = (props) => {
                 <div className="quotebtn">
                     
                     <h5 suggestedPrice>{(toggleQuote) ? "Suggested price: "+marginPrice +" per gallon": ''}</h5>
-                    <h5>{(toggleQuote) ? "Total amount: $"+ (marginPrice*values.gallon_requested) : ''}</h5>
+                    <h5>{(toggleQuote) ? "Total amount: $"+ (marginPrice*values.gallon_requested).toFixed(2) : ''}</h5>
 
                     <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Get Quote" className="btn btn-primary btn-block" 
                         onClick={function(e){
