@@ -92,7 +92,9 @@ const ContactForm = (props) => {
         if (values.name.length > 50) {
             errors['name'] = 'Is too long';
             setNameError("Name has to be shorter than 50 characters.");
-            throw new Error("Too long");
+            try {
+                throw new Error("Too long");
+            }catch{}
             }        
         }  
 
@@ -222,8 +224,6 @@ const ContactForm = (props) => {
             expect(() =>{ handleValidation(fakeUser); }).toThrowError("Too long");
         }catch{}
     }
-    //alert(values["name"]);
-    //alert(props.contactObjects[0]["name"]);
     
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit}>

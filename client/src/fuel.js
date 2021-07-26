@@ -116,15 +116,18 @@ const FuelForm = (props) => {
        
         //let fields caused an issue with refreshing and not inputting data
        //let fields = this.values.fields;
+        //date
         let errors = {};
         let formIsValid = true;
 
-        //date
         if (validator.isDate(values.delivery_date)) {
             if (validator.isBefore(values.delivery_date)) {
                 formIsValid = false;
                 errors["delivery_date"] = "can't be in the past";
                 setDateError("Date cannot be in the past.");
+                try{
+                    throw new Error("Past");
+                }catch{}
             }
         } 
         else {
@@ -165,6 +168,9 @@ const FuelForm = (props) => {
         try {
             expect(() =>{ handleValidation(fakeUser); }).toThrow(Error);
         }catch{}
+        try {
+            expect(() =>{ handleValidation(fakeUser2); }).toThrowError("Past");
+        }catch{}
     }
 
     return (
@@ -204,7 +210,7 @@ const FuelForm = (props) => {
                     </div>
             <div className="form-group">
                 <div className="savebtn">
-                <input type="submit" value= "Save" className="btn btn-primary btn-block" />
+                <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Save" className="btn btn-primary btn-block" />
                 </div>
                 </div>
                 </div>
