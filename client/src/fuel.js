@@ -168,7 +168,6 @@ const FuelForm = (props) => {
     const checkForm = e => {
         e.preventDefault();
         if(handleValidation(values)){
-            props.gasFormEdit(values);
             setToggleQuote(true);
         }
         try {
@@ -183,6 +182,9 @@ const FuelForm = (props) => {
         e.preventDefault();
         setToggleQuote(false);
         setValues(initialFieldValues);
+        if(handleValidation(values)){
+            props.gasFormEdit(values);
+        }
     }
 
     return (
