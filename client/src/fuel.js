@@ -29,6 +29,7 @@ const FuelForm = (props) => {
 
     const [gallonError, setGallonError] = useState('');
     const [dateError, setDateError] = useState('');
+    const [toggleQuote, setToggleQuote] = useState(false);
 
     //for pricing module
     var stateFee, gallonFee, historyFee, marginPrice;
@@ -46,7 +47,8 @@ const FuelForm = (props) => {
 
     var [values, setValues] = useState(initialFieldValues)
     const [errorMessage, setErrorMessage] = useState('')
-    
+    const [showQuote, setShowQuote] = useState(false);
+
     useEffect(() => {
         try {
             if (props.currentId == '')
@@ -87,18 +89,20 @@ const FuelForm = (props) => {
         })
     } catch {}
 
+    if(values.gallon_requested && values.gallon_requested.match(/^[0-9]*$/) && values.gallon_requested!=null){
+        if(parseInt(values.gallon_requested)>1000){
+            gallonFee = 0.02;
+        }else{
+           // alert("Test");
+            gallonFee = 0.01;
+        }
+    }
+
+    marginPrice = ((stateFee-historyFee+gallonFee+profitFee)*1.50)+1.50;
+    //alert(gallonFee);
     const handleInputChange = e => {
         var { name, value} = e.target;
-        
-        if(values.gallon_requested.match(/^[1-9][0-9]*/)){
-            if(parseInt(values.gallon_requested)>1000){
-                gallonFee = 0.02;
-            }else{
-                gallonFee = 0.01;
-            }
-        }
-
-        marginPrice = ((stateFee-historyFee+gallonFee+profitFee)*1.50)+1.50;
+        setToggleQuote(false);
 
         setValues({
             ...values,
@@ -111,6 +115,11 @@ const FuelForm = (props) => {
 
     }
 
+   
+   
+    //alert(marginPrice);
+   
+    
     //validation for fuel form 
     function handleValidation (values) {
        
@@ -155,10 +164,16 @@ const FuelForm = (props) => {
         }
        return (formIsValid);
     }
+
+    var suggestedPop, totalPop;
     
     const handleFormSubmit = e => {
-        if (e)
-            e.preventDefault()
+       
+        e.preventDefault();
+
+        setToggleQuote(false);
+        setValues(initialFieldValues);
+
         if(handleValidation(values)){
          props.gasFormEdit(values);
         }
@@ -170,8 +185,12 @@ const FuelForm = (props) => {
         }catch{}
     }
 
+    function setTo(varia, str){
+        varia = str;
+    }
+
     return (
-        <form autoComplete="off" onSubmit={handleFormSubmit}>
+        <form autoComplete="off">
             <section className = "contact">
             <div className="contactContainer">
             <div className="form-group input-group">
@@ -206,13 +225,26 @@ const FuelForm = (props) => {
                     <p className="errorMsg">{dateError}</p>
                     </div>
             <div className="form-group">
+                <div className="quotebtn">
+                    
+                    <h5 suggestedPrice>{(toggleQuote) ? "Suggested price: "+marginPrice +" per gallon": ''}</h5>
+                    <h5>{(toggleQuote) ? "Total amount: $"+ (marginPrice*values.gallon_requested).toFixed(2) : ''}</h5>
+
+                    <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Get Quote" className="btn btn-primary btn-block" 
+                        onClick={function(e){
+                            e.preventDefault();
+                            setToggleQuote(true);
+                    }}/>
+                </div>
                 <div className="savebtn">
-                <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Save" className="btn btn-primary btn-block" />
+                <input type="submit" disabled={!values.gallon_requested || !values.delivery_date} value= "Save" className="btn btn-primary btn-block"  onClick={handleFormSubmit}/>
                 </div>
                 </div>
                 </div>
+                
             </section>
         </form>
+       
     );
 }
 
