@@ -99,7 +99,7 @@ const Hero = (props) => {
                 //runs fuel page
             <div className="container"> 
                 <nav>
-                    <h2>Welcome, {"\n"}{welcome}</h2>
+                    <h2>Welcome, {welcome}</h2>
                     <Button className="midButton" onClick = {goBack}>Back</Button>
                     <Button className="logoutButt" //logout button
                     onClick={handleLogout}>Log Out</Button>
@@ -145,7 +145,7 @@ const Hero = (props) => {
                     //runs profile page
             <section className="hero">
                 <nav>
-                    <h2>Welcome, {"\n"}{welcome}</h2>
+                    <h2>Welcome, {welcome}</h2>
                     <Button className="midButton" onClick={() => setCount(!count)}>
                         Fuel Form
                     </Button>
