@@ -24,6 +24,11 @@ button {
   cursor: pointer;
 }
 
+button.quoteButton{
+  width: 100%;
+  padding: 8px 0;
+}
+
 .login {
   width: 100%;
   min-height: 100vh;
@@ -31,6 +36,11 @@ button {
   background-image: url("mountains_blue.jpeg");
   background-size: cover;
   display: flex;
+}
+
+
+.hero h5{
+  padding-left: 4%;
 }
 
 .login .loginContainer {
