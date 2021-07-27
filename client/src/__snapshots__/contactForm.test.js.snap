@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Contact Form component tests calls onSubmit prop function when form is submitted 1`] = `ShallowWrapper {}`;
