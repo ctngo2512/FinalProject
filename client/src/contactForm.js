@@ -229,6 +229,7 @@ const ContactForm = (props) => {
         try {
             expect(() =>{ handleValidation(fakeUser); }).toThrow(Error);
         }catch{}
+        //expect(nameError).toEqual('');
     }
     
     return (

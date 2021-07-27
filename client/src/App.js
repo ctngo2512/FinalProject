@@ -92,6 +92,12 @@ const App = () => {
     authListener();
   }, [])
 
+  expect(email).toEqual('');
+  expect(password).toEqual('');
+  expect(emailError).toEqual('');
+  expect(passwordError).toEqual('');
+  expect(user).toEqual('');
+
   return (
     //if user is logged in go to hero page, otherwise go to login page
     <div className = "App">
