@@ -20,9 +20,9 @@ const FuelForm = (props) => {
         total_due: ''
     }
     const fakeUser2 = {
-        gallon_requested: '1',
+        gallon_requested: '',
         delivery_address: '',
-        delivery_date: '02/16/1997',
+        delivery_date: '',
         suggested_price: '',
         total_due: ''
     }
@@ -180,6 +180,7 @@ const FuelForm = (props) => {
             setToggleQuote(true);
         }
     }
+
 
     const handleFormSubmit = e => {
         if (e)

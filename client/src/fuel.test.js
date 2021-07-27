@@ -8,6 +8,7 @@ import {act, render} from '@testing-library/react';
 window.alert = jest.fn();
 
 describe('Fuel page component tests', ()=> {
+    let checkForm;
     window.alert.mockClear();
 
     let handleFormSubmit;
@@ -42,4 +43,5 @@ describe('Fuel page component tests', ()=> {
             render(<FuelForm/>);
         });
     });
+
 });
