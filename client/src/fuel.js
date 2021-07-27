@@ -30,7 +30,7 @@ const FuelForm = (props) => {
     const [gallonError, setGallonError] = useState('');
     const [dateError, setDateError] = useState('');
     const [toggleQuote, setToggleQuote] = useState(false);
-    var [values, setValues] = useState(initialFieldValues)
+    var [values, setValues] = useState(initialFieldValues);
     const [errorMessage, setErrorMessage] = useState('')
     const [showQuote, setShowQuote] = useState(false);
     //for pricing module
@@ -60,7 +60,7 @@ const FuelForm = (props) => {
                     ...props.fuelObjects[props.currentId]
                 });
             }
-        } catch(error) {}
+        } catch{}
     }, [props.currentId, props.fuelObjects, props.initialFieldValues])
     
 
@@ -92,14 +92,16 @@ const FuelForm = (props) => {
         })
     } catch {}
 
-    if(values.gallon_requested && values.gallon_requested.match(/^[0-9]*$/) && values.gallon_requested!=null){
-        if(parseInt(values.gallon_requested)>1000){
-            gallonFee = 0.02;
-        }else{
-           // alert("Test");
-            gallonFee = 0.01;
+    useEffect(() => {
+        if(values.gallon_requested && values.gallon_requested.match(/^[0-9]*$/) && values.gallon_requested!=null){
+            if(parseInt(values.gallon_requested)>1000){
+                gallonFee = 0.02;
+            }else{
+               // alert("Test");
+                gallonFee = 0.01;
+            }
         }
-    }
+    })
 
 
     marginPrice = ((stateFee-historyFee+gallonFee+profitFee)*1.50)+1.50;
@@ -116,7 +118,6 @@ const FuelForm = (props) => {
             total_due: ((parseInt(values.gallon_requested))*marginPrice).toFixed(2),
             delivery_address: userAddy
         })
-
     }
    
     
@@ -165,21 +166,26 @@ const FuelForm = (props) => {
        return (formIsValid);
     }
 
-    const checkForm = e => {
-        e.preventDefault();
-        if(handleValidation(values)){
-            setToggleQuote(true);
-        }
+    useEffect(() => {
         try {
             expect(() =>{ handleValidation(fakeUser); }).toThrow(Error);
         }catch{}
         try {
             expect(() =>{ handleValidation(fakeUser2); }).toThrow(Error);
         }catch{}
+    })
+
+    const checkForm = e => {
+        if (e)
+            e.preventDefault();
+        if(handleValidation(values)){
+            setToggleQuote(true);
+        }
     }
 
     const handleFormSubmit = e => {
-        e.preventDefault();
+        if (e)
+            e.preventDefault();
         setToggleQuote(false);
         setValues(initialFieldValues);
         if(handleValidation(values)){
