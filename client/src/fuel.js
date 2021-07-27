@@ -26,13 +26,6 @@ const FuelForm = (props) => {
         suggested_price: '',
         total_due: ''
     }
-    const fakeUser3 = {
-        gallon_requested: '',
-        delivery_address: '',
-        delivery_date: '00/00/0000',
-        suggested_price: '',
-        total_due: ''
-    }
 
     const [gallonError, setGallonError] = useState('');
     const [dateError, setDateError] = useState('');
@@ -51,6 +44,7 @@ const FuelForm = (props) => {
         setDateError('');
     }
 
+
     var userAddy;
     const {
         userID
@@ -67,9 +61,6 @@ const FuelForm = (props) => {
                 });
             }
         } catch{}
-        expect(values).toEqual({"delivery_address": "", "delivery_date": "", "gallon_requested": "", "suggested_price": "", "total_due": ""});
-        expect(gallonError).toEqual('');
-        expect(dateError).toEqual('');
     }, [props.currentId, props.fuelObjects, props.initialFieldValues])
     
 
@@ -173,6 +164,15 @@ const FuelForm = (props) => {
        return (formIsValid);
     }
 
+    useEffect(() => {
+        try {
+            expect(() =>{ handleValidation(fakeUser); }).toThrow(Error);
+        }catch{}
+        try {
+            expect(() =>{ handleValidation(fakeUser2); }).toThrow(Error);
+        }catch{}
+    })
+
     const checkForm = e => {
         if (e)
             e.preventDefault();
@@ -191,19 +191,6 @@ const FuelForm = (props) => {
             props.gasFormEdit(values);
         }
     }
-
-    useEffect(() => {
-        try {
-            expect(() =>{ handleValidation(fakeUser); }).toThrow(Error);
-        }catch{}
-        try {
-            expect(() =>{ handleValidation(fakeUser2); }).toThrow(Error);
-        }catch{}
-        try {
-            expect(() =>{ handleValidation(fakeUser3); }).toThrow(Error);
-        }catch{}
-        expect(toggleQuote).toEqual(false);
-    })
 
     return (
         <form autoComplete="off">

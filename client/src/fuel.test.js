@@ -8,7 +8,10 @@ import {act, render} from '@testing-library/react';
 window.alert = jest.fn();
 
 describe('Fuel page component tests', ()=> {
+    let checkForm;
     window.alert.mockClear();
+
+    let handleFormSubmit;
 
     it("renders without crashing", () => {
         shallow(<Hero />);
@@ -23,9 +26,9 @@ describe('Fuel page component tests', ()=> {
 
     it('Renders user data', () => {
         let fakeUser = {
-            gallon_requested: '*',
+            gallon_requested: '',
             delivery_address: '',
-            delivery_date: '*',
+            delivery_date: '',
             suggested_price: '',
             total_due: ''
         }
