@@ -92,17 +92,15 @@ const FuelForm = (props) => {
         })
     } catch {}
 
-    useEffect(() => {
-        if(values.gallon_requested && values.gallon_requested.match(/^[0-9]*$/) && values.gallon_requested!=null){
-            if(parseInt(values.gallon_requested)>1000){
-                gallonFee = 0.02;
-            }else{
-               // alert("Test");
-                gallonFee = 0.01;
-            }
+    if(values.gallon_requested && values.gallon_requested.match(/^[0-9]*$/) && values.gallon_requested!=null){
+        if(parseInt(values.gallon_requested)>1000){
+            gallonFee = 0.02;
+        }else{
+            // alert("Test");
+            gallonFee = 0.01;
         }
-    })
-
+    }
+ 
 
     marginPrice = ((stateFee-historyFee+gallonFee+profitFee)*1.50)+1.50;
     //alert(gallonFee);
