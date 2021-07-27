@@ -26,6 +26,14 @@ const App = () => {
     setPasswordError('');
   }
 
+  try{
+    expect(email).toEqual('');
+  expect(password).toEqual('');
+  expect(emailError).toEqual('');
+  expect(passwordError).toEqual('');
+  expect(user).toEqual('');
+  }catch{}
+
   //log into firebase using firebase authentication
   const handleLogin = () => {
     clearErrors();
@@ -92,11 +100,6 @@ const App = () => {
     authListener();
   }, [])
 
-  expect(email).toEqual('');
-  expect(password).toEqual('');
-  expect(emailError).toEqual('');
-  expect(passwordError).toEqual('');
-  expect(user).toEqual('');
 
   return (
     //if user is logged in go to hero page, otherwise go to login page
